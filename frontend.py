@@ -15,7 +15,7 @@ if response.status_code == 200:
 else:
     st.write("Error connecting to the backend.")
 
-Login_URL = "https://automatic-timetable-generator-2953.onrender.com" 
+Login_URL = "https://automatic-timetable-generator-2953.onrender.com/login" 
 
 def login(username, password):
     response = requests.post(Login_URL, json={"username": username, "password": password})
