@@ -1,9 +1,6 @@
 import streamlit as st
 import requests
 
-import streamlit as st
-import requests
-
 # Backend API URL
 API_URL = "https://automatic-timetable-generator-2953.onrender.com/login" 
 
