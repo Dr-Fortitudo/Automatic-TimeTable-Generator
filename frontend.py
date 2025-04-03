@@ -4,7 +4,7 @@ import requests
 st.title("Automated Timetable System")
 
 # Backend URL
-API_URL = "http://127.0.0.1:5000/"
+API_URL = "https://automatic-timetable-generator-2953.onrender.com"
 
 # Fetch data from backend
 response = requests.get(API_URL)
