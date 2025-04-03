@@ -8,16 +8,6 @@ st.title("Faculty Login")
 API_URL = "https://automatic-timetable-generator-2953.onrender.com"
 LOGIN_URL = f"{API_URL}/login"
 
-# Check if backend is running
-try:
-    response = requests.get(API_URL)
-    if response.status_code == 200:
-        st.write("✅ Backend is running!")
-    else:
-        st.write("❌ Error connecting to the backend.")
-except requests.exceptions.RequestException:
-    st.write("❌ Backend is unreachable.")
-
 # Login function
 def login(username, password):
     try:
@@ -42,6 +32,3 @@ if login_button:
         st.experimental_rerun()
     else:
         st.error("Invalid username or password")
-
-# Debugging - Display session state
-st.write(st.session_state)
