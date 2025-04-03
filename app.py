@@ -14,7 +14,7 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # Predefined passwords
-FACULTY_PASSWORD = "fac1234"
+FACULTY_PASSWORD = "ec@1234"
 HOD_CREDENTIALS = {"username": "HOD@EC", "password": "ec@1234"}
 
 @app.route("/login", methods=["POST"])
