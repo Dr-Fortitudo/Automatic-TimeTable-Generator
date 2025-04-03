@@ -29,6 +29,6 @@ if login_button:
         st.success(f"Welcome {result['role']}!") 
         st.session_state["logged_in"] = True
         st.session_state["user"] = result
-        st.experimental_rerun()
+        st.rerun()
     else:
         st.error("Invalid username or password")
