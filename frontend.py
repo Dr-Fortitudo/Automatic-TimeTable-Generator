@@ -21,7 +21,7 @@ login_button = st.button("Login")
 if login_button:
     result = login(username, password)
     if result:
-        st.success(f"Welcome {result['name']}!")
+        st.success(f"Welcome {result['role']}!") 
         st.session_state["logged_in"] = True
         st.session_state["user"] = result
         st.experimental_rerun()
