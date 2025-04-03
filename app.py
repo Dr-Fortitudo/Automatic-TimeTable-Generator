@@ -18,6 +18,8 @@ db = firestore.client()
 FACULTY_PASSWORD = "ec@1234"
 HOD_CREDENTIALS = {"username": "HOD@EC", "password": "ec@1234"}
 
+@app.route("/")
+
 @app.route("/login", methods=["POST"])
 def login():
     data = request.json
