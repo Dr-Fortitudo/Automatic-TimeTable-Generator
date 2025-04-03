@@ -13,9 +13,26 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-@app.route("/")
-def home():
-    return jsonify({"message": "Flask API is running!"})
+# Predefined passwords
+FACULTY_PASSWORD = "fac1234"
+HOD_CREDENTIALS = {"username": "HOD@EC", "password": "ec@1234"}
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+    username = data.get("username")
+    password = data.get("password")
+
+    # Check if HOD login
+    if username == HOD_CREDENTIALS["username"] and password == HOD_CREDENTIALS["password"]:
+        return jsonify({"role": "HOD", "message": "Login successful"}), 200
+
+    # Check if Faculty login
+    faculty_ref = db.collection("users").document(username).get()
+    if faculty_ref.exists and password == FACULTY_PASSWORD:
+        return jsonify({"role": "Faculty", "message": "Login successful"}), 200
+
+    return jsonify({"message": "Invalid credentials"}), 401
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Use Render's assigned PORT or default to 5000
