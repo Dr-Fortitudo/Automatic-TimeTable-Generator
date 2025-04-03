@@ -6,24 +6,29 @@ st.title("Faculty Login")
 
 # Backend URL
 API_URL = "https://automatic-timetable-generator-2953.onrender.com"
+LOGIN_URL = f"{API_URL}/login"
 
-# Fetch data from backend
-response = requests.get(API_URL)
-if response.status_code == 200:
-    data = response.json()
-    st.write(f"Backend Response: {data['message']}")
-else:
-    st.write("Error connecting to the backend.")
-
-Login_URL = "https://automatic-timetable-generator-2953.onrender.com/login" 
-
-def login(username, password):
-    response = requests.post(Login_URL, json={"username": username, "password": password})
+# Check if backend is running
+try:
+    response = requests.get(API_URL)
     if response.status_code == 200:
-        return response.json()
+        st.write("✅ Backend is running!")
     else:
-        return None
+        st.write("❌ Error connecting to the backend.")
+except requests.exceptions.RequestException:
+    st.write("❌ Backend is unreachable.")
 
+# Login function
+def login(username, password):
+    try:
+        response = requests.post(LOGIN_URL, json={"username": username, "password": password})
+        if response.status_code == 200:
+            return response.json()
+    except requests.exceptions.RequestException:
+        return None
+    return None
+
+# Login form
 username = st.text_input("Username")
 password = st.text_input("Password", type="password")
 login_button = st.button("Login")
@@ -37,3 +42,6 @@ if login_button:
         st.experimental_rerun()
     else:
         st.error("Invalid username or password")
+
+# Debugging - Display session state
+st.write(st.session_state)
