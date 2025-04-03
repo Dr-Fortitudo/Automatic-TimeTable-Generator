@@ -1,30 +1,15 @@
 import streamlit as st
 import requests
 
-# Backend API URL
-API_URL = "https://automatic-timetable-generator-2953.onrender.com/login" 
+st.title("Automated Timetable System")
 
-def login(username, password):
-    response = requests.post(API_URL, json={"username": username, "password": password})
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return None
+# Backend URL
+API_URL = "http://127.0.0.1:5000/"
 
-# Streamlit UI
-st.title("Faculty Login")
-
-username = st.text_input("Username")
-password = st.text_input("Password", type="password")
-login_button = st.button("Login")
-
-if login_button:
-    result = login(username, password)
-    if result:
-        st.success(f"Welcome {result['role']}!") 
-        st.session_state["logged_in"] = True
-        st.session_state["user"] = result
-        st.experimental_rerun()
-    else:
-        st.error("Invalid username or password")
-
+# Fetch data from backend
+response = requests.get(API_URL)
+if response.status_code == 200:
+    data = response.json()
+    st.write(f"Backend Response: {data['message']}")
+else:
+    st.write("Error connecting to the backend.")
