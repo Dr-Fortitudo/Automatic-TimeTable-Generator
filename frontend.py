@@ -5,7 +5,7 @@ import streamlit as st
 import requests
 
 # Backend API URL
-API_URL = "https://your-backend-url.com/login"  # Replace with your actual Flask API endpoint
+API_URL = "https://automatic-timetable-generator-2953.onrender.com/login" 
 
 def login(username, password):
     response = requests.post(API_URL, json={"username": username, "password": password})
